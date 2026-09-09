@@ -96,13 +96,26 @@ export default function Home() {
   }
 
   if (done) {
-    return <main className="shell"><section className="card"><div className="topbar"><div className="brand">STAFF PULSE</div><div className="anon">Anonymous by design</div></div><div className="success"><div><div className="successIcon">✓</div><h1 className="title" style={{fontSize:"3rem"}}>Thank you.</h1><p className="subtitle">Your response has been submitted. If you need support, please speak with your line manager so the appropriate level of support can be arranged.</p></div></div></section></main>;
+    return (
+      <main className="shell">
+        <section className="card">
+          <div className="topbar"><div className="brand">WELLBEING STAFF SURVEY</div></div>
+          <div className="success">
+            <div>
+              <div className="successIcon">✓</div>
+              <h1 className="title" style={{ fontSize: "3rem" }}>Thank you.</h1>
+              <p className="subtitle">Your response has been submitted. If you need support, please speak with your line manager so the appropriate level of support can be arranged.</p>
+            </div>
+          </div>
+        </section>
+      </main>
+    );
   }
 
   return (
     <main className="shell">
       <section className="card">
-        <div className="topbar"><div className="brand">STAFF PULSE</div><div className="anon">Anonymous • Monthly check-in</div></div>
+        <div className="topbar"><div className="brand">WELLBEING STAFF SURVEY</div></div>
         <div className="progress"><div style={{ width: `${progress}%` }} /></div>
 
         <div className="content">
@@ -122,7 +135,7 @@ export default function Home() {
           ) : current ? (
             <>
               <div className="eyebrow">Question {step + 1} of {questions.length}</div>
-              <h1 className="title" style={{fontSize:"clamp(2rem,4vw,3.2rem)"}}>{current.title}</h1>
+              <h1 className="title" style={{ fontSize: "clamp(2rem,4vw,3.2rem)" }}>{current.title}</h1>
               {current.note && <p className="subtitle">{current.note}</p>}
 
               <div className="choices">
@@ -140,7 +153,7 @@ export default function Home() {
               {(() => {
                 const value = answers[current.id];
                 const wantsOther = current.type === "multi" ? Array.isArray(value) && value.some((v) => v.includes("More Specifically")) : typeof value === "string" && (value.includes("More Specifically") || value === "Other");
-                return wantsOther ? <input className="other" placeholder="Tell us more…" value={otherText[current.id] || ""} onChange={(e) => setOtherText((p) => ({...p, [current.id]: e.target.value}))} /> : null;
+                return wantsOther ? <input className="other" placeholder="Tell us more…" value={otherText[current.id] || ""} onChange={(e) => setOtherText((p) => ({ ...p, [current.id]: e.target.value }))} /> : null;
               })()}
             </>
           ) : null}
