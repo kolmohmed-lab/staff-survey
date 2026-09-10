@@ -41,35 +41,35 @@ const zhQuestionTitles: Record<string, string> = {
 };
 
 const zhOptions: Record<string, string> = {
-  "Heritage": "Heritage",
-  "Bilingual": "双语部",
+  Heritage: "Heritage",
+  Bilingual: "双语部",
   "DAIS Elementary": "DAIS 小学部",
   "DAIS Secondary": "DAIS 中学部",
-  "Boarding": "寄宿部",
+  Boarding: "寄宿部",
   "Early Years": "幼儿部",
-  "Elementary": "小学部",
+  Elementary: "小学部",
   "Middle School": "初中部",
   "High School": "高中部",
-  "Math": "数学",
-  "English": "英语",
+  Math: "数学",
+  English: "英语",
   "Social Studies": "社会学科",
-  "Mandarin": "中文",
-  "Science": "科学",
+  Mandarin: "中文",
+  Science: "科学",
   "PE / Athletics / ASA": "体育 / 运动 / 课外活动",
   "Art / Design": "艺术 / 设计",
   "Performing Arts": "表演艺术",
   "Student Services": "学生服务",
-  "EAL": "英语语言支持",
+  EAL: "英语语言支持",
   "SLT+": "学校领导团队",
   "Office / Support Staff": "行政 / 支持人员",
-  "HR": "人力资源",
-  "Finance": "财务",
-  "Facilities": "设施管理",
-  "Marketing": "市场",
-  "Admissions": "招生",
+  HR: "人力资源",
+  Finance: "财务",
+  Facilities: "设施管理",
+  Marketing: "市场",
+  Admissions: "招生",
   "Campus Village": "校园村",
-  "Catering": "餐饮",
-  "IT": "信息技术",
+  Catering: "餐饮",
+  IT: "信息技术",
   "I’m doing great, I am ready for it": "我状态很好，已经准备好了",
   "I have a lot of work coming up, but I’m pacing myself and will get it all done": "接下来工作很多，但我会合理安排节奏并完成任务",
   "I am holding steady": "我目前状态稳定",
@@ -84,7 +84,7 @@ const zhOptions: Record<string, string> = {
   "An athletic event": "体育赛事",
   "Something personal": "个人方面的事情",
   "Something professional": "工作方面的事情",
-  "Nothing": "没有特别期待的事情",
+  Nothing: "没有特别期待的事情",
   "Student support": "学生支持",
   "Parent communication": "家长沟通",
   "Grading / Student Feedback": "评分 / 学生反馈",
@@ -94,14 +94,14 @@ const zhOptions: Record<string, string> = {
   "Professional Development": "专业发展",
   "Working on My Learning Environment": "改善学习环境",
   "Professional Relationships": "工作中的人际关系",
-  "Supported": "得到支持",
-  "Alienated": "感到被疏远",
-  "Neglected": "感到被忽视",
+  Supported: "得到支持",
+  Alienated: "感到被疏远",
+  Neglected: "感到被忽视",
   "Micro-Managed": "感到被过度管理",
-  "Reassured": "感到安心",
-  "Burdened": "感到负担加重",
-  "Empowered": "感到被赋能",
-  "Other": "其他",
+  Reassured: "感到安心",
+  Burdened: "感到负担加重",
+  Empowered: "感到被赋能",
+  Other: "其他",
   "Working with colleagues on my team": "与团队同事合作",
   "Completing a work task and/or project": "完成工作任务和 / 或项目",
   "Special school event": "学校特别活动",
@@ -119,7 +119,7 @@ const zhOptions: Record<string, string> = {
   "Communicating with other departments": "与其他部门沟通",
   "Personal wellbeing": "个人身心健康",
   "Creating balance between competing priorities": "在多项优先事项之间取得平衡",
-  "Working smarter and/or Improving Processes": "更高效地工作和 / 或改进流程"
+  "Working smarter and/or Improving Processes": "更高效地工作和 / 或改进流程",
 };
 
 function needsSpecificText(value: string | string[] | undefined) {
@@ -150,11 +150,11 @@ export default function Home() {
   }, [team, answers.schoolDivision]);
 
   const current = step >= 0 ? questions[step] : null;
-  const progress = language && team ? ((step + 1) / (questions.length + 1)) * 100 : 0;
+  const progress = language && team && step >= 0 ? ((step + 1) / questions.length) * 100 : 0;
   const headerTitle = !team
-    ? (isZh ? "员工身心健康调查" : "WELLBEING STAFF SURVEY")
+    ? isZh ? "员工身心健康调查" : "WELLBEING STAFF SURVEY"
     : isZh
-      ? (team === "Academic" ? "月度学术团队身心健康调查" : "月度运营团队身心健康调查")
+      ? team === "Academic" ? "月度学术团队身心健康调查" : "月度运营团队身心健康调查"
       : `MONTHLY ${team.toUpperCase()} TEAM WELLBEING SURVEY`;
 
   const currentTitle = current
@@ -172,64 +172,198 @@ export default function Home() {
     : "";
 
   const canContinue = useMemo(() => {
-    if (!language) return false;
-    if (!team) return true;
-    if (step === -1) return true;
-    if (!current) return false;
+    if (!language || !team || !current) return false;
     const value = answers[current.id];
-    const hasAnswer = current.type === "multi" ? Array.isArray(value) && value.length > 0 : typeof value === "string" && value.trim().length > 0;
+    const hasAnswer = current.type === "multi"
+      ? Array.isArray(value) && value.length > 0
+      : typeof value === "string" && value.trim().length > 0;
     if (!hasAnswer) return false;
     if (needsSpecificText(value)) return (otherText[current.id] || "").trim().length > 0;
     return true;
-  }, [language, team, step, current, answers, otherText]);
+  }, [language, team, current, answers, otherText]);
 
-  function chooseSingle(id: string, value: string) { setAnswers((prev) => ({ ...prev, [id]: value })); }
+  function chooseSingle(id: string, value: string) {
+    setAnswers((prev) => ({ ...prev, [id]: value }));
+  }
+
   function toggleMulti(id: string, value: string) {
     setAnswers((prev) => {
       const existing = Array.isArray(prev[id]) ? (prev[id] as string[]) : [];
       return { ...prev, [id]: existing.includes(value) ? existing.filter((v) => v !== value) : [...existing, value] };
     });
   }
-  function chooseLanguage(value: Language) { setLanguage(value); setTeam(null); setStep(-1); setAnswers({}); setOtherText({}); }
-  function chooseTeam(value: Team) { setTeam(value); setStep(-1); setAnswers({}); setOtherText({}); }
+
+  function chooseLanguage(value: Language) {
+    setLanguage(value);
+    setTeam(null);
+    setStep(-1);
+    setAnswers({});
+    setOtherText({});
+  }
+
+  function chooseTeam(value: Team) {
+    setTeam(value);
+    setStep(0);
+    setAnswers({});
+    setOtherText({});
+  }
 
   async function next() {
     if (!language || !team || !canContinue) return;
-    if (step === -1) return setStep(0);
     if (step < questions.length - 1) return setStep((s) => s + 1);
-    setSubmitting(true); setError("");
+
+    setSubmitting(true);
+    setError("");
     try {
       const res = await fetch("/api/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ language, team, surveyMonth: new Intl.DateTimeFormat("en-US", { month: "long", year: "numeric" }).format(new Date()), answers, otherText, submittedAt: new Date().toISOString() }),
+        body: JSON.stringify({
+          language,
+          team,
+          surveyMonth: new Intl.DateTimeFormat("en-US", { month: "long", year: "numeric" }).format(new Date()),
+          answers,
+          otherText,
+          submittedAt: new Date().toISOString(),
+        }),
       });
       if (!res.ok) throw new Error("Submission failed");
       setDone(true);
     } catch {
       setError(isZh ? "提交失败，请重试。" : "We couldn’t submit your response. Please try again.");
-    } finally { setSubmitting(false); }
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   function back() {
     setError("");
-    if (step > 0) setStep((s) => s - 1);
-    else if (step === 0) setStep(-1);
-    else if (team) setTeam(null);
-    else if (language) setLanguage(null);
+    if (!language) return;
+    if (!team) {
+      setLanguage(null);
+      return;
+    }
+    if (step > 0) {
+      setStep((s) => s - 1);
+      return;
+    }
+    setTeam(null);
+    setStep(-1);
+    setAnswers({});
+    setOtherText({});
   }
 
   if (done) {
-    return <main className="shell"><section className="card"><div className="topbar"><div className="brand">{headerTitle}</div></div><div className="success"><div><div className="successIcon">✓</div><h1 className="title" style={{ fontSize: "3rem" }}>{isZh ? "感谢您的提交。" : "Thank you for the submission."}</h1><p className="subtitle successMessage">{isZh ? <>如果您在任何方面需要帮助，请随时通过邮件或当面联系您的直属经理，我们会一起为您安排适当的支持。<br /><br />我们非常重视确保您拥有取得成功所需要的一切支持。<br /><br /><strong>~ 校园领导团队</strong></> : <>If you need help with anything, please feel free to email or speak with your line manager, and we will work on the appropriate level of support.<br /><br />It is important to us that you have everything you need to be successful.<br /><br /><strong>~ Campus Leadership</strong></>}</p></div></div></section></main>;
+    return (
+      <main className="shell">
+        <section className="card">
+          <div className="topbar"><div className="brand">{headerTitle}</div></div>
+          <div className="success">
+            <div>
+              <div className="successIcon">✓</div>
+              <h1 className="title" style={{ fontSize: "3rem" }}>{isZh ? "感谢您的提交。" : "Thank you for the submission."}</h1>
+              <p className="subtitle successMessage">
+                {isZh ? <>
+                  如果您在任何方面需要帮助，请随时通过邮件或当面联系您的直属经理，我们会一起为您安排适当的支持。
+                  <br /><br />
+                  我们非常重视确保您拥有取得成功所需要的一切支持。
+                  <br /><br />
+                  <strong>~ 校园领导团队</strong>
+                </> : <>
+                  If you need help with anything, please feel free to email or speak with your line manager, and we will work on the appropriate level of support.
+                  <br /><br />
+                  It is important to us that you have everything you need to be successful.
+                  <br /><br />
+                  <strong>~ Campus Leadership</strong>
+                </>}
+              </p>
+            </div>
+          </div>
+        </section>
+      </main>
+    );
   }
 
   return (
-    <main className="shell"><section className="card"><div className="topbar"><div className="brand">{headerTitle}</div></div>{language && team && <div className="progress"><div style={{ width: `${progress}%` }} /></div>}<div className="content">
-      {!language ? <><div className="eyebrow">Language / 语言</div><h1 className="title">Choose your language<br />请选择语言</h1><p className="subtitle">Select the language you would like to use for the survey.<br />请选择您希望使用的调查语言。</p><div className="grid"><button className="option" onClick={() => chooseLanguage("English")}><strong>English</strong></button><button className="option" onClick={() => chooseLanguage("Chinese")}><strong>中文</strong></button></div></>
-      : !team ? <><div className="eyebrow">{isZh ? "月度身心健康调查" : "Monthly wellbeing survey"}</div><h1 className="title">{isZh ? "请选择您的团队" : "How has this month been for you?"}</h1><p className="subtitle">{isZh ? "本调查完全匿名。请先选择最符合您岗位的团队。" : "This survey is completely anonymous. Start by choosing the team that best describes your role."}</p><div className="grid"><button className="option" onClick={() => chooseTeam("Academic")}><strong>{isZh ? "学术团队" : "Academic"}</strong><span>{isZh ? "教学、学习及面向学生的学术岗位" : "Teaching, learning and student-facing academic teams"}</span></button><button className="option" onClick={() => chooseTeam("Operations")}><strong>{isZh ? "运营团队" : "Operations"}</strong><span>{isZh ? "校园服务、支持及运营岗位" : "Campus, service and operational teams"}</span></button></div></>
-      : current ? <><div className="eyebrow">{isZh ? `第 ${step + 1} 题，共 ${questions.length} 题` : `Question ${step + 1} of ${questions.length}`}</div><h1 className="title questionTitle">{currentTitle}</h1>{currentNote && <p className="subtitle instruction">{currentNote}</p>}<div className="choices">{current.options?.map((option) => { const value = answers[current.id]; const selected = current.type === "multi" ? Array.isArray(value) && value.includes(option) : value === option; return <button key={option} className={`option ${selected ? "selected" : ""}`} onClick={() => current.type === "multi" ? toggleMulti(current.id, option) : chooseSingle(current.id, option)}><strong>{isZh ? (zhOptions[option] || option) : option}</strong></button>; })}</div>{needsSpecificText(answers[current.id]) && <div className="specificWrap"><input className="other" placeholder={isZh ? "请具体说明…" : "Please specify…"} value={otherText[current.id] || ""} onChange={(e) => setOtherText((p) => ({ ...p, [current.id]: e.target.value }))} aria-required="true" />{(otherText[current.id] || "").trim().length === 0 && <div className="requiredHint">{isZh ? "请输入内容后再继续。" : "Please enter a response before continuing."}</div>}</div>}</> : null}
-      {error && <div className="error">{error}</div>}
-      <div className="footer"><div>{language && <button className="btn ghost" onClick={back}>{isZh ? "← 返回" : "← Back"}</button>}</div>{language && team && <button className="btn primary" disabled={!canContinue || submitting} onClick={next}>{submitting ? (isZh ? "正在提交…" : "Submitting…") : step === questions.length - 1 ? (isZh ? "提交问卷" : "Submit response") : (isZh ? "继续 →" : "Continue →")}</button>}</div>
-    </div></section></main>
+    <main className="shell">
+      <section className="card">
+        <div className="topbar"><div className="brand">{headerTitle}</div></div>
+        {language && team && step >= 0 && <div className="progress"><div style={{ width: `${progress}%` }} /></div>}
+
+        <div className="content">
+          {!language ? (
+            <>
+              <div className="eyebrow">Language / 语言</div>
+              <h1 className="title">Choose your language<br />请选择语言</h1>
+              <p className="subtitle">Select the language you would like to use for the survey.<br />请选择您希望使用的调查语言。</p>
+              <div className="grid">
+                <button className="option" onClick={() => chooseLanguage("English")}><strong>English</strong></button>
+                <button className="option" onClick={() => chooseLanguage("Chinese")}><strong>中文</strong></button>
+              </div>
+            </>
+          ) : !team ? (
+            <>
+              <div className="eyebrow">{isZh ? "月度身心健康调查" : "Monthly wellbeing survey"}</div>
+              <h1 className="title">{isZh ? "请选择您的团队" : "How has this month been for you?"}</h1>
+              <p className="subtitle">{isZh ? "本调查完全匿名。请先选择最符合您岗位的团队。" : "This survey is completely anonymous. Start by choosing the team that best describes your role."}</p>
+              <div className="grid">
+                <button className="option" onClick={() => chooseTeam("Academic")}>
+                  <strong>{isZh ? "学术团队" : "Academic"}</strong>
+                  <span>{isZh ? "教学、学习及面向学生的学术岗位" : "Teaching, learning and student-facing academic teams"}</span>
+                </button>
+                <button className="option" onClick={() => chooseTeam("Operations")}>
+                  <strong>{isZh ? "运营团队" : "Operations"}</strong>
+                  <span>{isZh ? "校园服务、支持及运营岗位" : "Campus, service and operational teams"}</span>
+                </button>
+              </div>
+            </>
+          ) : current ? (
+            <>
+              <div className="eyebrow">{isZh ? `第 ${step + 1} 题，共 ${questions.length} 题` : `Question ${step + 1} of ${questions.length}`}</div>
+              <h1 className="title questionTitle">{currentTitle}</h1>
+              {currentNote && <p className="subtitle instruction">{currentNote}</p>}
+
+              <div className="choices">
+                {current.options?.map((option) => {
+                  const value = answers[current.id];
+                  const selected = current.type === "multi" ? Array.isArray(value) && value.includes(option) : value === option;
+                  return (
+                    <button key={option} className={`option ${selected ? "selected" : ""}`} onClick={() => current.type === "multi" ? toggleMulti(current.id, option) : chooseSingle(current.id, option)}>
+                      <strong>{isZh ? zhOptions[option] || option : option}</strong>
+                    </button>
+                  );
+                })}
+              </div>
+
+              {needsSpecificText(answers[current.id]) && (
+                <div className="specificWrap">
+                  <input
+                    className="other"
+                    placeholder={isZh ? "请具体说明…" : "Please specify…"}
+                    value={otherText[current.id] || ""}
+                    onChange={(e) => setOtherText((p) => ({ ...p, [current.id]: e.target.value }))}
+                    aria-required="true"
+                  />
+                  {(otherText[current.id] || "").trim().length === 0 && (
+                    <div className="requiredHint">{isZh ? "请输入内容后再继续。" : "Please enter a response before continuing."}</div>
+                  )}
+                </div>
+              )}
+            </>
+          ) : null}
+
+          {error && <div className="error">{error}</div>}
+
+          <div className="footer">
+            <div>{language && <button className="btn ghost" onClick={back}>{isZh ? "← 返回" : "← Back"}</button>}</div>
+            {language && team && current && (
+              <button className="btn primary" disabled={!canContinue || submitting} onClick={next}>
+                {submitting ? (isZh ? "正在提交…" : "Submitting…") : step === questions.length - 1 ? (isZh ? "提交问卷" : "Submit response") : (isZh ? "继续 →" : "Continue →")}
+              </button>
+            )}
+          </div>
+        </div>
+      </section>
+    </main>
   );
 }
