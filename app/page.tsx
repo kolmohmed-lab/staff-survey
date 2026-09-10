@@ -12,23 +12,29 @@ type Question = {
 };
 
 const academicQuestions: Question[] = [
-  { id: "schoolDivision", title: "Your School / Division", type: "single", options: ["Heritage", "Bilingual", "DAIS Elementary", "DAIS Secondary", "Boarding"] },
-  { id: "department", title: "Your Department", type: "single", options: ["Early Years", "Elementary", "Middle School", "High School", "Math", "English", "Social Studies", "Mandarin", "Science", "PE / Athletics / ASA", "Art / Design", "Performing Arts", "Student Services", "EAL", "SLT+", "Office / Support Staff"] },
+  { id: "schoolDivision", title: "Your School / Division", note: "(Choose one option that best defines your placement.)", type: "single", options: ["Heritage", "Bilingual", "DAIS Elementary", "DAIS Secondary", "Boarding"] },
+  { id: "department", title: "Your Department", note: "(Choose one option that best defines your placement.)", type: "single", options: ["Early Years", "Elementary", "Middle School", "High School", "Math", "English", "Social Studies", "Mandarin", "Science", "PE / Athletics / ASA", "Art / Design", "Performing Arts", "Student Services", "EAL", "SLT+", "Office / Support Staff"] },
   { id: "monthAhead", title: "Which statement best describes how you are feeling about the month ahead?", type: "single", options: ["I’m doing great, I am ready for it", "I have a lot of work coming up, but I’m pacing myself and will get it all done", "I am holding steady", "I am overwhelmed and could use some additional support", "I am currently experiencing a lot of personal stress in my life", "I am currently experiencing a lot of professional stress at school", "More Specifically"] },
-  { id: "lookingForward", title: "What are you most looking forward to in the coming month?", note: "Choose all that apply.", type: "multi", options: ["Something academic in class", "Something extracurricular", "A special event", "An athletic event", "Something personal", "Something professional", "Nothing", "More Specifically"] },
-  { id: "notLookingForward", title: "What are you not looking forward to this coming month?", note: "Choose all that apply.", type: "multi", options: ["Something academic in class", "Something extracurricular", "A special event", "An athletic event", "Something personal", "Something professional", "Nothing", "More Specifically"] },
-  { id: "focus", title: "This coming month you are planning to focus more on…", note: "Choose all that apply.", type: "multi", options: ["Student support", "Parent communication", "Grading / Student Feedback", "Administrative Tasks", "Getting Organized", "Personal Issues", "Professional Development", "Working on My Learning Environment", "Professional Relationships", "More Specifically"] },
-  { id: "leadershipFeeling", title: "The past month you felt ______ by your Division Leaders.", type: "single", options: ["Supported", "Alienated", "Neglected", "Micro-Managed", "Reassured", "Burdened", "Empowered", "Other"] },
+  { id: "lookingForward", title: "What are you most looking forward to in the coming month?", note: "(Check all that apply.)", type: "multi", options: ["Something academic in class", "Something extracurricular", "A special event", "An athletic event", "Something personal", "Something professional", "Nothing", "More Specifically"] },
+  { id: "notLookingForward", title: "What are you not looking forward to this coming month?", note: "(Check all that apply.)", type: "multi", options: ["Something academic in class", "Something extracurricular", "A special event", "An athletic event", "Something personal", "Something professional", "Nothing", "More Specifically"] },
+  { id: "focus", title: "This coming month you are planning to focus more on…", note: "(Check all that apply.)", type: "multi", options: ["Student support", "Parent communication", "Grading / Student Feedback", "Administrative Tasks", "Getting Organized", "Personal Issues", "Professional Development", "Working on My Learning Environment", "Professional Relationships", "More Specifically"] },
+  { id: "leadershipFeeling", title: "The past month you felt ________________ by your Division Leaders.", note: "(Choose one.)", type: "single", options: ["Supported", "Alienated", "Neglected", "Micro-Managed", "Reassured", "Burdened", "Empowered", "Other"] },
 ];
 
 const operationsQuestions: Question[] = [
-  { id: "department", title: "Your Department", type: "single", options: ["HR", "Finance", "Facilities", "Marketing", "Admissions", "Campus Village", "Catering", "IT"] },
+  { id: "department", title: "Your Department", note: "(Choose one option that best defines your placement.)", type: "single", options: ["HR", "Finance", "Facilities", "Marketing", "Admissions", "Campus Village", "Catering", "IT"] },
   { id: "monthAhead", title: "Which statement best describes how you are feeling about the month ahead?", type: "single", options: ["I’m doing great, I am ready for it", "I have a lot of work coming up, but I’m pacing myself and will get it all done", "I am holding steady", "I am overwhelmed and could use some additional support", "I am currently experiencing a lot of personal stress in my life", "I am currently experiencing a lot of professional work-related stress", "More Specifically"] },
-  { id: "lookingForward", title: "What are you most looking forward to in the coming month?", note: "Choose all that apply.", type: "multi", options: ["Working with colleagues on my team", "Completing a work task and/or project", "Special school event", "School athletic event", "New initiative and/or change", "Professional growth/development opportunity", "Nothing particular", "More Specifically"] },
-  { id: "notLookingForward", title: "What are you not looking forward to this coming month?", note: "Choose all that apply.", type: "multi", options: ["Heavy workload and/or busy period", "Project and/or task deadlines", "Difficult Conversations", "New / Upcoming Changes", "Something personal", "Something professional", "Nothing particular", "More Specifically"] },
-  { id: "focus", title: "This coming month you are planning to focus more on…", note: "Choose all that apply.", type: "multi", options: ["Supporting colleagues", "Completing key priorities and tasks", "Getting organized", "Communicating with other departments", "Personal wellbeing", "Creating balance between competing priorities", "Professional Development", "Working smarter and/or Improving Processes", "Professional Relationships", "More Specifically"] },
-  { id: "leadershipFeeling", title: "The past month leadership has left you feeling…", type: "single", options: ["Supported", "Alienated", "Neglected", "Micro-Managed", "Reassured", "Burdened", "Empowered", "More Specifically"] },
+  { id: "lookingForward", title: "What are you most looking forward to in the coming month?", note: "(Check all that apply.)", type: "multi", options: ["Working with colleagues on my team", "Completing a work task and/or project", "Special school event", "School athletic event", "New initiative and/or change", "Professional growth/development opportunity", "Nothing particular", "More Specifically"] },
+  { id: "notLookingForward", title: "What are you not looking forward to this coming month?", note: "(Check all that apply.)", type: "multi", options: ["Heavy workload and/or busy period", "Project and/or task deadlines", "Difficult Conversations", "New / Upcoming Changes", "Something personal", "Something professional", "Nothing particular", "More Specifically"] },
+  { id: "focus", title: "This coming month you are planning to focus more on…", note: "(Check all that apply.)", type: "multi", options: ["Supporting colleagues", "Completing key priorities and tasks", "Getting organized", "Communicating with other departments", "Personal wellbeing", "Creating balance between competing priorities", "Professional Development", "Working smarter and/or Improving Processes", "Professional Relationships", "More Specifically"] },
+  { id: "leadershipFeeling", title: "The past month leadership has left you feeling: ________________", note: "(Choose one.)", type: "single", options: ["Supported", "Alienated", "Neglected", "Micro-Managed", "Reassured", "Burdened", "Empowered", "More Specifically"] },
 ];
+
+function needsSpecificText(value: string | string[] | undefined) {
+  if (!value) return false;
+  if (Array.isArray(value)) return value.some((v) => v.includes("More Specifically"));
+  return value.includes("More Specifically") || value === "Other";
+}
 
 export default function Home() {
   const [team, setTeam] = useState<Team | null>(null);
@@ -42,14 +48,21 @@ export default function Home() {
   const questions = team === "Academic" ? academicQuestions : operationsQuestions;
   const current = step >= 0 ? questions[step] : null;
   const progress = team ? ((step + 1) / (questions.length + 1)) * 100 : 0;
+  const headerTitle = team ? `MONTHLY ${team.toUpperCase()} TEAM WELLBEING SURVEY` : "WELLBEING STAFF SURVEY";
 
   const canContinue = useMemo(() => {
     if (step === -1) return !!team;
     if (!current) return false;
+
     const value = answers[current.id];
-    if (current.type === "multi") return Array.isArray(value) && value.length > 0;
-    return typeof value === "string" && value.trim().length > 0;
-  }, [step, team, current, answers]);
+    const hasAnswer = current.type === "multi"
+      ? Array.isArray(value) && value.length > 0
+      : typeof value === "string" && value.trim().length > 0;
+
+    if (!hasAnswer) return false;
+    if (needsSpecificText(value)) return (otherText[current.id] || "").trim().length > 0;
+    return true;
+  }, [step, team, current, answers, otherText]);
 
   function chooseSingle(id: string, value: string) {
     setAnswers((prev) => ({ ...prev, [id]: value }));
@@ -63,6 +76,7 @@ export default function Home() {
   }
 
   async function next() {
+    if (!canContinue) return;
     if (step === -1) return setStep(0);
     if (step < questions.length - 1) return setStep((s) => s + 1);
 
@@ -99,12 +113,18 @@ export default function Home() {
     return (
       <main className="shell">
         <section className="card">
-          <div className="topbar"><div className="brand">WELLBEING STAFF SURVEY</div></div>
+          <div className="topbar"><div className="brand">{headerTitle}</div></div>
           <div className="success">
             <div>
               <div className="successIcon">✓</div>
-              <h1 className="title" style={{ fontSize: "3rem" }}>Thank you.</h1>
-              <p className="subtitle">Your response has been submitted. If you need support, please speak with your line manager so the appropriate level of support can be arranged.</p>
+              <h1 className="title" style={{ fontSize: "3rem" }}>Thank you for the submission.</h1>
+              <p className="subtitle successMessage">
+                If you need help with anything, please feel free to email or speak with your line manager, and we will work on the appropriate level of support.
+                <br /><br />
+                It is important to us that you have everything you need to be successful.
+                <br /><br />
+                <strong>~ Campus Leadership</strong>
+              </p>
             </div>
           </div>
         </section>
@@ -115,7 +135,7 @@ export default function Home() {
   return (
     <main className="shell">
       <section className="card">
-        <div className="topbar"><div className="brand">WELLBEING STAFF SURVEY</div></div>
+        <div className="topbar"><div className="brand">{headerTitle}</div></div>
         <div className="progress"><div style={{ width: `${progress}%` }} /></div>
 
         <div className="content">
@@ -127,7 +147,8 @@ export default function Home() {
               <div className="grid">
                 {(["Academic", "Operations"] as Team[]).map((t) => (
                   <button key={t} className={`option ${team === t ? "selected" : ""}`} onClick={() => setTeam(t)}>
-                    <strong>{t}</strong><span>{t === "Academic" ? "Teaching, learning and student-facing academic teams" : "Campus, service and operational teams"}</span>
+                    <strong>{t}</strong>
+                    <span>{t === "Academic" ? "Teaching, learning and student-facing academic teams" : "Campus, service and operational teams"}</span>
                   </button>
                 ))}
               </div>
@@ -135,8 +156,8 @@ export default function Home() {
           ) : current ? (
             <>
               <div className="eyebrow">Question {step + 1} of {questions.length}</div>
-              <h1 className="title" style={{ fontSize: "clamp(2rem,4vw,3.2rem)" }}>{current.title}</h1>
-              {current.note && <p className="subtitle">{current.note}</p>}
+              <h1 className="title questionTitle">{current.title}</h1>
+              {current.note && <p className="subtitle instruction">{current.note}</p>}
 
               <div className="choices">
                 {current.options?.map((option) => {
@@ -150,11 +171,20 @@ export default function Home() {
                 })}
               </div>
 
-              {(() => {
-                const value = answers[current.id];
-                const wantsOther = current.type === "multi" ? Array.isArray(value) && value.some((v) => v.includes("More Specifically")) : typeof value === "string" && (value.includes("More Specifically") || value === "Other");
-                return wantsOther ? <input className="other" placeholder="Tell us more…" value={otherText[current.id] || ""} onChange={(e) => setOtherText((p) => ({ ...p, [current.id]: e.target.value }))} /> : null;
-              })()}
+              {needsSpecificText(answers[current.id]) && (
+                <div className="specificWrap">
+                  <input
+                    className="other"
+                    placeholder="Please specify…"
+                    value={otherText[current.id] || ""}
+                    onChange={(e) => setOtherText((p) => ({ ...p, [current.id]: e.target.value }))}
+                    aria-required="true"
+                  />
+                  {(otherText[current.id] || "").trim().length === 0 && (
+                    <div className="requiredHint">Please enter a response before continuing.</div>
+                  )}
+                </div>
+              )}
             </>
           ) : null}
 
