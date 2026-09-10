@@ -19,16 +19,17 @@ button{cursor:pointer}
 .card:before{content:"";position:absolute;width:280px;height:280px;border-radius:50%;background:rgba(115,200,255,.11);right:-90px;top:-90px}
 .topbar{display:flex;justify-content:space-between;align-items:center;gap:18px;position:relative;z-index:1}
 .brand{font-weight:800;letter-spacing:.11em;color:var(--navy);font-size:.84rem}
-.anon{font-size:.84rem;color:var(--muted);padding:9px 13px;border-radius:999px;background:rgba(255,255,255,.58);border:1px solid rgba(255,255,255,.82)}
 .progress{height:5px;background:rgba(11,31,58,.08);border-radius:99px;margin:24px 0 0;overflow:hidden}
 .progress>div{height:100%;background:linear-gradient(90deg,var(--blue),var(--blue-2));transition:width .28s ease}
 .content{max-width:980px;margin:54px auto 0;position:relative;z-index:1}
 .eyebrow{font-size:.82rem;text-transform:uppercase;letter-spacing:.13em;color:var(--blue-2);font-weight:800;margin-bottom:14px}
 .title{font-size:clamp(2rem,5vw,4rem);line-height:1.03;margin:0;color:var(--navy);letter-spacing:-.045em}
+.questionTitle{font-size:clamp(2rem,4vw,3.2rem)}
 .subtitle{font-size:1.08rem;line-height:1.65;color:var(--muted);max-width:720px;margin:18px 0 0}
+.instruction{font-size:.98rem;font-weight:650;color:#62758c}
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:34px}
 .choices{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:28px}
-.option{width:100%;min-height:88px;border:1px solid rgba(23,58,99,.12);background:rgba(255,255,255,.58);padding:16px 17px;border-radius:20px;text-align:left;color:var(--ink);transition:transform .18s ease,border-color .18s ease,background .18s ease,box-shadow .18s ease;box-shadow:0 8px 24px rgba(11,31,58,.04);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.option{width:100%;min-height:88px;border:1px solid rgba(23,58,99,.12);background:rgba(255,255,255,.58);padding:16px 17px;border-radius:20px;text-align:center;color:var(--ink);transition:transform .18s ease,border-color .18s ease,background .18s ease,box-shadow .18s ease;box-shadow:0 8px 24px rgba(11,31,58,.04);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);display:flex;flex-direction:column;align-items:center;justify-content:center}
 .option:hover{transform:translateY(-2px);border-color:rgba(69,174,242,.48);background:rgba(255,255,255,.84);box-shadow:0 10px 28px rgba(40,120,180,.08)}
 .option.selected{border-color:var(--blue-2);box-shadow:0 0 0 3px rgba(69,174,242,.12),0 10px 28px rgba(40,120,180,.08);background:linear-gradient(180deg,rgba(115,200,255,.22),rgba(255,255,255,.86))}
 .option strong{display:block;font-size:.96rem;line-height:1.35}
@@ -42,9 +43,12 @@ button{cursor:pointer}
 .textarea,.other{width:100%;border:1px solid rgba(23,58,99,.14);background:rgba(255,255,255,.62);border-radius:18px;padding:15px 16px;color:var(--ink);outline:none;margin-top:14px}
 .textarea{min-height:120px;resize:vertical}
 .textarea:focus,.other:focus{border-color:var(--blue-2);box-shadow:0 0 0 3px rgba(69,174,242,.12)}
+.specificWrap{margin-top:14px}
+.requiredHint{margin-top:8px;color:#8f1e1e;font-size:.88rem}
 .success{display:grid;place-items:center;text-align:center;min-height:470px}
 .successIcon{width:72px;height:72px;border-radius:24px;display:grid;place-items:center;background:rgba(115,200,255,.18);color:var(--blue-2);font-size:2rem;margin:0 auto 20px}
+.successMessage{margin-left:auto;margin-right:auto;max-width:760px}
 .error{margin-top:16px;padding:12px 14px;border-radius:14px;background:rgba(180,40,40,.08);color:#8f1e1e;font-size:.92rem}
 @media (max-width:1050px){.choices{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media (max-width:780px){.choices{grid-template-columns:repeat(2,minmax(0,1fr))}.content{max-width:100%}}
-@media (max-width:560px){.shell{padding:12px}.card{min-height:calc(100vh - 24px);border-radius:26px;padding:20px}.grid,.choices{grid-template-columns:1fr}.content{margin-top:42px}.anon{display:none}.title{font-size:2.5rem}.footer{align-items:stretch}.footer .btn{flex:1}.option{min-height:auto}}
+@media (max-width:560px){.shell{padding:12px}.card{min-height:calc(100vh - 24px);border-radius:26px;padding:20px}.grid,.choices{grid-template-columns:1fr}.content{margin-top:42px}.title{font-size:2.5rem}.footer{align-items:stretch}.footer .btn{flex:1}.option{min-height:auto}}
