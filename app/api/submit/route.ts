@@ -14,7 +14,7 @@ export async function POST(request: Request) {
       team: body.team,
       surveyMonth: body.surveyMonth,
       wellbeingScore: 0,
-      comment: JSON.stringify({ answers: body.answers, otherText: body.otherText, monthAhead }),
+      comment: JSON.stringify({ language: body.language, answers: body.answers, otherText: body.otherText, monthAhead }),
       submittedAt: body.submittedAt,
     };
 
