@@ -45,7 +45,17 @@ export default function Home() {
   const [done, setDone] = useState(false);
   const [error, setError] = useState("");
 
-  const questions = team === "Academic" ? academicQuestions : operationsQuestions;
+  const questions = useMemo(() => {
+    if (team === "Operations") return operationsQuestions;
+    if (team === "Academic") {
+      const needsDepartment = answers.schoolDivision === "DAIS Secondary";
+      return needsDepartment
+        ? academicQuestions
+        : academicQuestions.filter((question) => question.id !== "department");
+    }
+    return [];
+  }, [team, answers.schoolDivision]);
+
   const current = step >= 0 ? questions[step] : null;
   const progress = team ? ((step + 1) / (questions.length + 1)) * 100 : 0;
   const headerTitle = team ? `MONTHLY ${team.toUpperCase()} TEAM WELLBEING SURVEY` : "WELLBEING STAFF SURVEY";
