@@ -14,8 +14,10 @@ The browser never receives the Power Automate URL or its shared secret.
 
 ## Required Vercel environment variables
 
+For the current preview build:
+
 - `ADMIN_USERNAME`
-- `ADMIN_PASSWORD_HASH`
+- `ADMIN_PASSWORD`
 - `ADMIN_SESSION_SECRET` (random value, minimum 32 characters)
 - `POWER_AUTOMATE_READ_URL`
 - `POWER_AUTOMATE_READ_SECRET`
@@ -23,9 +25,7 @@ The browser never receives the Power Automate URL or its shared secret.
 
 Do not use `NEXT_PUBLIC_` for any of these values.
 
-Generate a bcrypt password hash locally with:
-
-`node -e "console.log(require('bcryptjs').hashSync('REPLACE_WITH_PASSWORD', 12))"`
+The plain `ADMIN_PASSWORD` setup is only for preview testing. Before production launch, switch to Microsoft SSO or a hashed password.
 
 ## Power Automate read-only flow
 
@@ -77,7 +77,7 @@ If the HTTP trigger in your tenant supports Microsoft Entra authentication, use 
 - `/api/admin/*` routes are also protected.
 - Session lifetime is eight hours.
 - Cookie is HTTP-only, SameSite=Lax, and Secure in production.
-- Password verification happens only on the server using bcrypt.
+- Password verification happens only on the server.
 - Power Automate read URL and secret are server-only environment variables.
 - Management responses use `Cache-Control: no-store, private`.
 
