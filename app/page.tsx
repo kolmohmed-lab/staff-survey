@@ -32,95 +32,106 @@ const operationsQuestions: Question[] = [
 ];
 
 const zhQuestionTitles: Record<string, string> = {
-  schoolDivision: "您所在的学校 / 学部",
+  schoolDivision: "您所在的学校/学部",
   department: "您所在的部门",
-  monthAhead: "以下哪一项最能描述您对接下来一个月的感受？",
-  lookingForward: "接下来一个月，您最期待什么？",
-  notLookingForward: "接下来一个月，您最不期待什么？",
-  focus: "接下来一个月，您计划更专注于哪些方面？",
+  monthAhead: "以下哪项最能描述您对未来一个月的感受：",
+  lookingForward: "在未来一个月中，您最期待什么？",
+  notLookingForward: "在未来一个月中，您最不期待什么？",
+  focus: "在未来一个月中，您计划更多关注哪些方面？",
 };
 
 const zhOptions: Record<string, string> = {
-  Heritage: "Heritage",
+  Heritage: "传承部",
   Bilingual: "双语部",
   "DAIS Elementary": "DAIS 小学部",
   "DAIS Secondary": "DAIS 中学部",
   Boarding: "寄宿部",
   "Early Years": "幼儿部",
-  Elementary: "小学部",
-  "Middle School": "初中部",
-  "High School": "高中部",
+  Elementary: "小学",
+  "Middle School": "初中",
+  "High School": "高中",
   Math: "数学",
-  English: "英语",
+  English: "英文",
   "Social Studies": "社会学科",
   Mandarin: "中文",
   Science: "科学",
-  "PE / Athletics / ASA": "体育 / 运动 / 课外活动",
-  "Art / Design": "艺术 / 设计",
+  "PE / Athletics / ASA": "体育/竞技/课外活动",
+  "Art / Design": "艺术/设计",
   "Performing Arts": "表演艺术",
   "Student Services": "学生服务",
-  EAL: "英语语言支持",
-  "SLT+": "学校领导团队",
-  "Office / Support Staff": "行政 / 支持人员",
+  EAL: "英语语言支持（EAL）",
+  "SLT+": "高级领导团队（SLT+）",
+  "Office / Support Staff": "办公室/支持人员",
   HR: "人力资源",
   Finance: "财务",
   Facilities: "设施管理",
   Marketing: "市场",
   Admissions: "招生",
-  "Campus Village": "校园村",
+  "Campus Village": "公寓",
   Catering: "餐饮",
-  IT: "信息技术",
+  IT: "信息技术（IT）",
   "I’m doing great, I am ready for it": "我状态很好，已经准备好了",
-  "I have a lot of work coming up, but I’m pacing myself and will get it all done": "接下来工作很多，但我会合理安排节奏并完成任务",
+  "I have a lot of work coming up, but I’m pacing myself and will get it all done": "接下来工作很多，但我正在合理安排节奏，并有信心完成",
   "I am holding steady": "我目前状态稳定",
-  "I am overwhelmed and could use some additional support": "我感到压力很大，希望得到更多支持",
+  "I am overwhelmed and could use some additional support": "我感到压力很大，希望得到一些额外支持",
   "I am currently experiencing a lot of personal stress in my life": "我目前在个人生活方面承受较大压力",
   "I am currently experiencing a lot of professional stress at school": "我目前在学校工作方面承受较大压力",
-  "I am currently experiencing a lot of professional work-related stress": "我目前承受较大的工作压力",
-  "More Specifically": "其他（请具体说明）",
-  "Something academic in class": "课堂教学相关的事情",
+  "I am currently experiencing a lot of professional work-related stress": "我目前承受较大的工作相关压力",
+  "More Specifically": "更具体地说",
+  "Something academic in class": "课堂教学相关事项",
   "Something extracurricular": "课外活动",
   "A special event": "特别活动",
-  "An athletic event": "体育赛事",
+  "An athletic event": "体育活动",
   "Something personal": "个人方面的事情",
-  "Something professional": "工作方面的事情",
-  Nothing: "没有特别期待的事情",
+  "Something professional": "工作/专业方面的事情",
   "Student support": "学生支持",
   "Parent communication": "家长沟通",
-  "Grading / Student Feedback": "评分 / 学生反馈",
+  "Grading / Student Feedback": "评分/学生反馈",
   "Administrative Tasks": "行政事务",
-  "Getting Organized": "整理与规划",
+  "Getting Organized": "提升组织与规划",
   "Personal Issues": "个人事务",
   "Professional Development": "专业发展",
-  "Working on My Learning Environment": "改善学习环境",
-  "Professional Relationships": "工作中的人际关系",
+  "Working on My Learning Environment": "改善我的学习环境",
+  "Professional Relationships": "专业关系",
   Supported: "得到支持",
-  Alienated: "感到被疏远",
-  Neglected: "感到被忽视",
-  "Micro-Managed": "感到被过度管理",
+  Alienated: "被疏远",
+  Neglected: "被忽视",
+  "Micro-Managed": "被过度管理",
   Reassured: "感到安心",
   Burdened: "感到负担加重",
-  Empowered: "感到被赋能",
+  Empowered: "获得赋能",
   Other: "其他",
   "Working with colleagues on my team": "与团队同事合作",
-  "Completing a work task and/or project": "完成工作任务和 / 或项目",
+  "Completing a work task and/or project": "完成工作任务和/或项目",
   "Special school event": "学校特别活动",
   "School athletic event": "学校体育活动",
-  "New initiative and/or change": "新的项目和 / 或变化",
-  "Professional growth/development opportunity": "专业成长 / 发展机会",
-  "Nothing particular": "没有特别的事情",
-  "Heavy workload and/or busy period": "工作量大和 / 或繁忙时期",
-  "Project and/or task deadlines": "项目和 / 或任务截止日期",
+  "New initiative and/or change": "新的举措和/或变化",
+  "Professional growth/development opportunity": "专业成长/发展机会",
+  "Heavy workload and/or busy period": "工作量大和/或繁忙时期",
+  "Project and/or task deadlines": "项目和/或任务截止日期",
   "Difficult Conversations": "困难的沟通或谈话",
-  "New / Upcoming Changes": "新的 / 即将到来的变化",
+  "New / Upcoming Changes": "新的/即将发生的变化",
   "Supporting colleagues": "支持同事",
-  "Completing key priorities and tasks": "完成重点工作和任务",
-  "Getting organized": "整理与规划",
+  "Completing key priorities and tasks": "完成关键优先事项和任务",
+  "Getting organized": "提升组织与规划",
   "Communicating with other departments": "与其他部门沟通",
   "Personal wellbeing": "个人身心健康",
-  "Creating balance between competing priorities": "在多项优先事项之间取得平衡",
-  "Working smarter and/or Improving Processes": "更高效地工作和 / 或改进流程",
+  "Creating balance between competing priorities": "在多项优先事务之间取得平衡",
+  "Working smarter and/or Improving Processes": "更高效地工作和/或改进流程",
 };
+
+function chineseOptionLabel(option: string, questionId: string, team: Team | null) {
+  if (option === "Nothing") {
+    return questionId === "lookingForward" ? "没有特别期待" : "没有特别不期待的事情";
+  }
+  if (option === "Nothing particular") {
+    return questionId === "lookingForward" ? "没有特别期待" : "没有特别不期待的事情";
+  }
+  if (option === "Something professional" && team === "Operations" && questionId === "notLookingForward") {
+    return "工作方面的事情";
+  }
+  return zhOptions[option] || option;
+}
 
 function needsSpecificText(value: string | string[] | undefined) {
   if (!value) return false;
@@ -152,22 +163,30 @@ export default function Home() {
   const current = step >= 0 ? questions[step] : null;
   const progress = language && team && step >= 0 ? ((step + 1) / questions.length) * 100 : 0;
   const headerTitle = !team
-    ? isZh ? "员工身心健康调查" : "WELLBEING STAFF SURVEY"
+    ? isZh ? "员工身心健康问卷" : "WELLBEING STAFF SURVEY"
     : isZh
-      ? team === "Academic" ? "月度学术团队身心健康调查" : "月度运营团队身心健康调查"
+      ? team === "Academic" ? "月度学术团队身心健康问卷" : "月度运营团队身心健康问卷"
       : `MONTHLY ${team.toUpperCase()} TEAM WELLBEING SURVEY`;
 
   const currentTitle = current
     ? isZh
       ? current.id === "leadershipFeeling"
-        ? team === "Academic" ? "过去一个月，您的学部领导让您感到：" : "过去一个月，领导让您感到："
+        ? team === "Academic"
+          ? "在过去一个月中，您觉得学部领导让您感到____________"
+          : "在过去一个月中，领导团队让您感到____________"
         : zhQuestionTitles[current.id] || current.title
       : current.title
     : "";
 
   const currentNote = current
     ? isZh
-      ? current.id === "leadershipFeeling" ? "（请选择一项。）" : current.type === "multi" ? "（可多选。）" : "（请选择最符合您情况的一项。）"
+      ? current.id === "schoolDivision" || current.id === "department"
+        ? "（请选择最符合您所属部门的一项）"
+        : current.id === "leadershipFeeling"
+          ? "（请选择一项）"
+          : current.type === "multi"
+            ? "（可多选）"
+            : ""
       : current.note
     : "";
 
@@ -264,7 +283,7 @@ export default function Home() {
               <h1 className="title" style={{ fontSize: "3rem" }}>{isZh ? "感谢您的提交。" : "Thank you for the submission."}</h1>
               <p className="subtitle successMessage">
                 {isZh ? <>
-                  如果您在任何方面需要帮助，请随时通过邮件或当面联系您的直属经理，我们会一起为您安排适当的支持。
+                  如果您在任何方面需要帮助，请随时通过电子邮件或当面与您的直属主管沟通，我们将共同确定适当的支持方式。
                   <br /><br />
                   我们非常重视确保您拥有取得成功所需要的一切支持。
                   <br /><br />
@@ -303,9 +322,9 @@ export default function Home() {
             </>
           ) : !team ? (
             <>
-              <div className="eyebrow">{isZh ? "月度身心健康调查" : "Monthly wellbeing survey"}</div>
+              <div className="eyebrow">{isZh ? "月度身心健康问卷" : "Monthly wellbeing survey"}</div>
               <h1 className="title">{isZh ? "请选择您的团队" : "How has this month been for you?"}</h1>
-              <p className="subtitle">{isZh ? "本调查完全匿名。请先选择最符合您岗位的团队。" : "This survey is completely anonymous. Start by choosing the team that best describes your role."}</p>
+              <p className="subtitle">{isZh ? "本问卷完全匿名；您的登录信息不会被保存。请选择最符合您岗位的团队。" : "This survey is completely anonymous. Start by choosing the team that best describes your role."}</p>
               <div className="grid">
                 <button className="option" onClick={() => chooseTeam("Academic")}>
                   <strong>{isZh ? "学术团队" : "Academic"}</strong>
@@ -329,7 +348,7 @@ export default function Home() {
                   const selected = current.type === "multi" ? Array.isArray(value) && value.includes(option) : value === option;
                   return (
                     <button key={option} className={`option ${selected ? "selected" : ""}`} onClick={() => current.type === "multi" ? toggleMulti(current.id, option) : chooseSingle(current.id, option)}>
-                      <strong>{isZh ? zhOptions[option] || option : option}</strong>
+                      <strong>{isZh ? chineseOptionLabel(option, current.id, team) : option}</strong>
                     </button>
                   );
                 })}
@@ -339,7 +358,7 @@ export default function Home() {
                 <div className="specificWrap">
                   <input
                     className="other"
-                    placeholder={isZh ? "请具体说明…" : "Please specify…"}
+                    placeholder={isZh ? "更具体地说…" : "Please specify…"}
                     value={otherText[current.id] || ""}
                     onChange={(e) => setOtherText((p) => ({ ...p, [current.id]: e.target.value }))}
                     aria-required="true"
