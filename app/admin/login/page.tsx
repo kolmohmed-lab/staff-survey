@@ -1,11 +1,10 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function AdminLoginPage() {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -28,7 +27,7 @@ export default function AdminLoginPage() {
       return;
     }
 
-    router.replace(searchParams.get("next") || "/admin");
+    router.replace("/admin");
     router.refresh();
   }
 
