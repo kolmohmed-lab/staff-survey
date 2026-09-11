@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Staff Pulse",
+  title: "Staff Wellbeing Survey",
   description: "Anonymous monthly staff wellbeing survey",
 };
 
