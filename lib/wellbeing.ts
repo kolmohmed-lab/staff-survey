@@ -57,14 +57,40 @@ function monthKey(record: WellbeingRecord) {
   return `${record.year}-${record.surveyMonth}`;
 }
 
+function normalizeKey(key: string) {
+  return key.toLowerCase().replace(/_x[0-9a-f]{4}_/g, "").replace(/[^a-z0-9]/g, "");
+}
+
+function readField(row: Record<string, unknown>, aliases: string[]) {
+  const lookup = new Map(Object.entries(row).map(([key, value]) => [normalizeKey(key), value]));
+  for (const alias of aliases) {
+    const value = lookup.get(normalizeKey(alias));
+    if (value !== undefined && value !== null) return value;
+  }
+  return "";
+}
+
+function asString(row: Record<string, unknown>, aliases: string[]) {
+  const value = readField(row, aliases);
+  if (Array.isArray(value)) return value.join("; ");
+  if (typeof value === "object" && value !== null) {
+    const candidate = (value as Record<string, unknown>).Value ?? (value as Record<string, unknown>).value;
+    if (candidate !== undefined) return String(candidate);
+  }
+  return String(value ?? "");
+}
+
 export async function fetchWellbeingRecords(): Promise<WellbeingRecord[]> {
   const url = process.env.POWER_AUTOMATE_READ_URL;
   const secret = process.env.POWER_AUTOMATE_READ_SECRET;
-  if (!url || !secret) throw new Error("Wellbeing read flow is not configured.");
+  if (!url) throw new Error("Wellbeing read flow is not configured.");
+
+  const headers: Record<string, string> = { "Content-Type": "application/json" };
+  if (secret) headers["x-portal-secret"] = secret;
 
   const response = await fetch(url, {
     method: "POST",
-    headers: { "Content-Type": "application/json", "x-portal-secret": secret },
+    headers,
     body: JSON.stringify({ action: "readWellbeingResponses" }),
     cache: "no-store",
   });
@@ -73,26 +99,33 @@ export async function fetchWellbeingRecords(): Promise<WellbeingRecord[]> {
   const payload = await response.json();
   const rows = Array.isArray(payload) ? payload : Array.isArray(payload?.items) ? payload.items : [];
 
-  return rows.map((row: Record<string, unknown>) => ({
-    submissionId: String(row.submissionId ?? row.SubmissionID ?? row.SubmissionId ?? ""),
-    submittedAt: String(row.submittedAt ?? row.SubmittedAt ?? ""),
-    surveyMonth: String(row.surveyMonth ?? row.SurveyMonth ?? ""),
-    year: Number(row.year ?? row.Year ?? 0),
-    language: String(row.language ?? row.Language ?? ""),
-    team: String(row.team ?? row.Team ?? ""),
-    schoolDivision: String(row.schoolDivision ?? row.SchoolDivision ?? ""),
-    department: String(row.department ?? row.Department ?? ""),
-    monthAhead: String(row.monthAhead ?? row.MonthAhead ?? ""),
-    lookingForward: String(row.lookingForward ?? row.LookingForwardTo ?? ""),
-    notLookingForward: String(row.notLookingForward ?? row.NotLookingForwardTo ?? ""),
-    focusAreas: String(row.focusAreas ?? row.FocusAreas ?? ""),
-    leadershipFeeling: String(row.leadershipFeeling ?? row.LeadershipFeeling ?? ""),
-    monthAheadDetail: String(row.monthAheadDetail ?? row.MonthAheadDetail ?? ""),
-    lookingForwardDetail: String(row.lookingForwardDetail ?? row.LookingForwardDetail ?? ""),
-    notLookingForwardDetail: String(row.notLookingForwardDetail ?? row.NotLookingForwardDetail ?? ""),
-    focusDetail: String(row.focusDetail ?? row.FocusDetail ?? ""),
-    leadershipDetail: String(row.leadershipDetail ?? row.LeadershipDetail ?? ""),
-  }));
+  return rows.map((row: Record<string, unknown>) => {
+    const submittedAt = asString(row, ["submittedAt", "Submitted At", "SubmittedAt", "Created"]);
+    const yearValue = asString(row, ["year", "Year"]);
+    const parsedDate = new Date(submittedAt);
+    const inferredYear = Number.isNaN(parsedDate.getTime()) ? 0 : parsedDate.getFullYear();
+
+    return {
+      submissionId: asString(row, ["submissionId", "Submission ID", "SubmissionID", "SubmissionId", "Title"]),
+      submittedAt,
+      surveyMonth: asString(row, ["surveyMonth", "Survey Month", "SurveyMonth"]),
+      year: Number(yearValue || inferredYear || 0),
+      language: asString(row, ["language", "Language"]),
+      team: asString(row, ["team", "Team"]),
+      schoolDivision: asString(row, ["schoolDivision", "School Division", "SchoolDivision", "Division"]),
+      department: asString(row, ["department", "Department"]),
+      monthAhead: asString(row, ["monthAhead", "Month Ahead", "MonthAhead"]),
+      lookingForward: asString(row, ["lookingForward", "Looking Forward To", "LookingForwardTo", "Looking Forward"]),
+      notLookingForward: asString(row, ["notLookingForward", "Not Looking Forward To", "NotLookingForwardTo", "Not Looking Forward"]),
+      focusAreas: asString(row, ["focusAreas", "Focus Areas", "FocusAreas", "Focus"]),
+      leadershipFeeling: asString(row, ["leadershipFeeling", "Leadership Feeling", "LeadershipFeeling", "Leadership"]),
+      monthAheadDetail: asString(row, ["monthAheadDetail", "Month Ahead Detail", "MonthAheadDetail"]),
+      lookingForwardDetail: asString(row, ["lookingForwardDetail", "Looking Forward Detail", "LookingForwardDetail"]),
+      notLookingForwardDetail: asString(row, ["notLookingForwardDetail", "Not Looking Forward Detail", "NotLookingForwardDetail"]),
+      focusDetail: asString(row, ["focusDetail", "Focus Detail", "FocusDetail"]),
+      leadershipDetail: asString(row, ["leadershipDetail", "Leadership Detail", "LeadershipDetail"]),
+    };
+  });
 }
 
 export function buildWellbeingDashboard(allRecords: WellbeingRecord[], filters: WellbeingFilters = {}) {
