@@ -7,6 +7,7 @@ import type { ReactNode } from "react";
 const navItems = [
   ["Overview", "/admin"],
   ["Staff Wellbeing", "/admin/wellbeing"],
+  ["Formal Observations", "/admin/formal-observations"],
   ["Learning Walks", "/admin/learning-walks"],
   ["MAP Data", "/admin/map"],
   ["Operations", "/admin/operations"],
@@ -35,7 +36,7 @@ export default function AdminShell({ title, subtitle, children }: { title: strin
         <nav className="adminNav" aria-label="Management sections">
           {navItems.map(([label, href]) => {
             const active = href === "/admin" ? pathname === href : pathname.startsWith(href);
-            const disabled = !["/admin", "/admin/wellbeing"].includes(href);
+            const disabled = !["/admin", "/admin/wellbeing", "/admin/formal-observations"].includes(href);
             return disabled ? (
               <span className="adminNavItem adminNavDisabled" key={href}>{label}<small>Later</small></span>
             ) : (
