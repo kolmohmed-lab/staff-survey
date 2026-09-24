@@ -10,8 +10,15 @@ export default function AdminOverviewPage() {
           <span>Anonymous staff wellbeing responses, trends, leadership feeling, focus areas and written comments.</span>
           <span className="moduleTag">Available now</span>
         </Link>
+
+        <Link href="/admin/formal-observations" className="adminPanel moduleCard">
+          <strong>Formal Observations</strong>
+          <span>Full formal lesson observation records, self-appraisals, evidence, feedback and print-ready reports.</span>
+          <span className="moduleTag">Available now</span>
+        </Link>
+
         {[
-          ["Learning Walks", "Classroom observation and learning-walk reporting."],
+          ["Learning Walks", "Learning-walk reporting kept separate from formal observations."],
           ["MAP Data", "Assessment trends, cohorts and benchmark reporting."],
           ["Operations", "Operations and support-team management data."],
           ["Cover Data", "Cover allocation, history and staffing patterns."],
